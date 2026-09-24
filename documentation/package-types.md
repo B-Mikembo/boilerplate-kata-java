@@ -8,13 +8,13 @@ This application comes with 2 package level annotations:
 To mark a package, you have to add a `package-info.java` file at the package root with:
 
 ```java
-@com.jsorant.kata.SharedKernel
-package com.jsorant.kata;
+@com.brice.kata.SharedKernel
+package com.brice.kata;
 ```
 
 or:
 
 ```java
-@com.jsorant.kata.BusinessContext
-package com.jsorant.kata;
+@com.brice.kata.BusinessContext
+package com.brice.kata;
 ```

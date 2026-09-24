@@ -3,7 +3,7 @@
     "module" : "init",
     "date" : "2024-01-22T13:14:58.978501100Z",
     "properties" : {
-      "packageName" : "com.jsorant.kata",
+      "packageName" : "com.brice.kata",
       "projectName" : "Boilerplate for Katas in Java",
       "baseName" : "boilerplateKataJava",
       "endOfLine" : "lf",
@@ -13,7 +13,7 @@
     "module" : "infinitest-filters",
     "date" : "2024-01-22T13:14:59.023498500Z",
     "properties" : {
-      "packageName" : "com.jsorant.kata",
+      "packageName" : "com.brice.kata",
       "projectName" : "Boilerplate for Katas in Java",
       "baseName" : "boilerplateKataJava",
       "endOfLine" : "lf",
@@ -23,7 +23,7 @@
     "module" : "maven-java",
     "date" : "2024-01-22T13:14:59.071497100Z",
     "properties" : {
-      "packageName" : "com.jsorant.kata",
+      "packageName" : "com.brice.kata",
       "projectName" : "Boilerplate for Katas in Java",
       "baseName" : "boilerplateKataJava",
       "endOfLine" : "lf",
@@ -33,7 +33,7 @@
     "module" : "prettier",
     "date" : "2024-01-22T13:14:59.146655100Z",
     "properties" : {
-      "packageName" : "com.jsorant.kata",
+      "packageName" : "com.brice.kata",
       "projectName" : "Boilerplate for Katas in Java",
       "baseName" : "boilerplateKataJava",
       "endOfLine" : "lf",
@@ -43,7 +43,7 @@
     "module" : "java-base",
     "date" : "2024-01-22T13:14:59.226006100Z",
     "properties" : {
-      "packageName" : "com.jsorant.kata",
+      "packageName" : "com.brice.kata",
       "projectName" : "Boilerplate for Katas in Java",
       "baseName" : "boilerplateKataJava",
       "endOfLine" : "lf",
