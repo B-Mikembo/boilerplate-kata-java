@@ -35,16 +35,13 @@ public class BrainfuckTest {
     byte[] bytes = new byte[30_000];
     int dataPointer = 0;
     for (var character : program.toCharArray()) {
-      if (character == '+')
-        bytes[dataPointer]++;
-      else if (character == '-')
-        bytes[dataPointer]--;
-      else if (character == '>')
-        dataPointer = (dataPointer + 1) % bytes.length;
-      else if (character == '<')
-        dataPointer = (dataPointer - 1) % bytes.length;
-      else
-        System.out.print((char) bytes[dataPointer]);
+      switch (character) {
+        case '+' -> bytes[dataPointer]++;
+        case '-' -> bytes[dataPointer]--;
+        case '>' -> dataPointer = (dataPointer + 1) % bytes.length;
+        case '<' -> dataPointer = (dataPointer - 1) % bytes.length;
+        default -> System.out.print((char) bytes[dataPointer]);
+      }
     }
     return bytes;
   }
