@@ -38,13 +38,17 @@ public class BrainfuckTest {
     byte[] bytes = new byte[30_000];
     int dataPointer = 0;
     Scanner in = new Scanner(System.in);
+    boolean skipped = false;
     for (var character : program.toCharArray()) {
+      if(skipped) continue;
       switch (character) {
         case '+' -> bytes[dataPointer]++;
         case '-' -> bytes[dataPointer]--;
         case '>' -> dataPointer = (dataPointer + 1) % bytes.length;
         case '<' -> dataPointer = (dataPointer - 1) % bytes.length;
         case ',' -> bytes[dataPointer] = (byte) System.in.read();
+        case '[' -> skipped = true;
+        case ']' -> skipped = false;
         default -> System.out.print((char) bytes[dataPointer]);
       }
     }
@@ -94,5 +98,15 @@ public class BrainfuckTest {
     System.setIn(inContent);
     byte[] result = execute(",");
     assertThat(result[0]).isEqualTo(toByte(72));
+  }
+
+  @Test
+  void shouldIgnoreCommandsBetweenBracketsWhenByteAtDataPointerEqualsZero() throws IOException {
+    byte[] bytes = execute("[" + "+".repeat(72) + "]");
+    assertThat(bytesToString(bytes)).isEqualTo("");
+  }
+
+  private static String bytesToString(byte[] bytes) {
+    return new String(bytes).trim();
   }
 }
