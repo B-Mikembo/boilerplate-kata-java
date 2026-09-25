@@ -11,32 +11,43 @@ public class BrainfuckTest {
     assertThat(execute(null)).hasSize(30_000).containsOnly(0);
   }
 
-  @Test
-  void shouldIncrementByte() {
-    byte[] execute = execute("+");
-    assertThat(execute[0]).isEqualTo((byte) 1);
-  }
-
-  @Test
-  void shouldIncrementMultipleTimes() {
-    assertThat(execute("++")[0]).isEqualTo((byte) 2);
-  }
-
-  @Test
-  void shouldDecrementOnce() {
-    assertThat(execute("-")[0]).isEqualTo((byte) 255);
-  }
-
   private byte[] execute(String program) {
-    if(program == null || program.isBlank())
+    if (program == null || program.isBlank())
       return new byte[30_000];
     byte[] bytes = new byte[30_000];
-    for(var character : program.toCharArray()) {
-      if(character == '+')
-        bytes[0]++;
+    int dataPointer = 0;
+    for (var character : program.toCharArray()) {
+      if (character == '+')
+        bytes[dataPointer]++;
+      else if (character == '-')
+        bytes[dataPointer]--;
       else
-        bytes[0]--;
+        dataPointer = (dataPointer + 1) % bytes.length;
     }
     return bytes;
+  }
+
+  @Test
+  void shouldIncrement() {
+    assertThat(execute("+")[0]).isEqualTo(toByte(1));
+    assertThat(execute("++")[0]).isEqualTo(toByte(2));
+  }
+
+  private static byte toByte(int integer) {
+    return (byte) integer;
+  }
+
+  @Test
+  void shouldDecrement() {
+    assertThat(execute("-")[0]).isEqualTo(toByte(255));
+    assertThat(execute("--")[0]).isEqualTo(toByte(254));
+  }
+
+  //  [0,1,0,0,...]
+  @Test
+  void shouldIncrementDataPointer() {
+    byte[] result = execute(">+");
+    assertThat(result[0]).isEqualTo(toByte(0));
+    assertThat(result[1]).isEqualTo(toByte(1));
   }
 }
