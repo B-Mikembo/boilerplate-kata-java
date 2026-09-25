@@ -1,10 +1,28 @@
 package com.brice.kata;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BrainfuckTest {
+  private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+  private final PrintStream originalOut = System.out;
+
+  @BeforeEach
+  void setUp() {
+    System.setOut(new PrintStream(outContent));
+  }
+
+  @AfterEach
+  void tearDown() {
+    System.setOut(originalOut);
+  }
+
   @Test
   void shouldReturnEmptyArrayWhenMissingProgram() {
     assertThat(execute("")).hasSize(30_000).containsOnly(0);
@@ -21,10 +39,12 @@ public class BrainfuckTest {
         bytes[dataPointer]++;
       else if (character == '-')
         bytes[dataPointer]--;
-      else if(character == '>')
+      else if (character == '>')
         dataPointer = (dataPointer + 1) % bytes.length;
-      else
+      else if (character == '<')
         dataPointer = (dataPointer - 1) % bytes.length;
+      else
+        System.out.print((char) bytes[dataPointer]);
     }
     return bytes;
   }
@@ -58,5 +78,11 @@ public class BrainfuckTest {
     byte[] result = execute("><+");
     assertThat(result[0]).isEqualTo(toByte(1));
     assertThat(result[1]).isEqualTo(toByte(0));
+  }
+
+  @Test
+  void shouldPrintAsciiValueAtDataPointer() {
+    execute("+".repeat(72) + ".");
+    assertThat(outContent.toString().trim()).isEqualTo("H");
   }
 }
