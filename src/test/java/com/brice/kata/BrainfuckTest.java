@@ -22,12 +22,20 @@ public class BrainfuckTest {
     assertThat(execute("++")[0]).isEqualTo((byte) 2);
   }
 
+  @Test
+  void shouldDecrementOnce() {
+    assertThat(execute("-")[0]).isEqualTo((byte) 255);
+  }
+
   private byte[] execute(String program) {
     if(program == null || program.isBlank())
       return new byte[30_000];
     byte[] bytes = new byte[30_000];
     for(var character : program.toCharArray()) {
-      bytes[0]++;
+      if(character == '+')
+        bytes[0]++;
+      else
+        bytes[0]--;
     }
     return bytes;
   }
