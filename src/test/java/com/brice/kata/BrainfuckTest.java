@@ -21,8 +21,10 @@ public class BrainfuckTest {
         bytes[dataPointer]++;
       else if (character == '-')
         bytes[dataPointer]--;
-      else
+      else if(character == '>')
         dataPointer = (dataPointer + 1) % bytes.length;
+      else
+        dataPointer = (dataPointer - 1) % bytes.length;
     }
     return bytes;
   }
@@ -49,5 +51,12 @@ public class BrainfuckTest {
     byte[] result = execute(">+");
     assertThat(result[0]).isEqualTo(toByte(0));
     assertThat(result[1]).isEqualTo(toByte(1));
+  }
+
+  @Test
+  void shouldDecrementDataPointer() {
+    byte[] result = execute("><+");
+    assertThat(result[0]).isEqualTo(toByte(1));
+    assertThat(result[1]).isEqualTo(toByte(0));
   }
 }
