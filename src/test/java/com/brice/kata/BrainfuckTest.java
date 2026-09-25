@@ -17,11 +17,18 @@ public class BrainfuckTest {
     assertThat(execute[0]).isEqualTo((byte) 1);
   }
 
+  @Test
+  void shouldIncrementMultipleTimes() {
+    assertThat(execute("++")[0]).isEqualTo((byte) 2);
+  }
+
   private byte[] execute(String program) {
     if(program == null || program.isBlank())
       return new byte[30_000];
     byte[] bytes = new byte[30_000];
-    bytes[0]++;
+    for(var character : program.toCharArray()) {
+      bytes[0]++;
+    }
     return bytes;
   }
 }
